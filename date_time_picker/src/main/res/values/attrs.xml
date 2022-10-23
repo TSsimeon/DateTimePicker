@@ -62,6 +62,8 @@
 
     <declare-styleable name="DateTimePicker">
         <attr name="dt_showLabel" format="boolean" />
+        <!--fork仓库新增属性设置labelColor-->
+        <attr name="dl_labelColor" format="color" />
         <attr name="dt_textColor" format="color" />
         <attr name="dt_dividerColor" format="color" />
         <attr name="dt_themeColor" format="color" />

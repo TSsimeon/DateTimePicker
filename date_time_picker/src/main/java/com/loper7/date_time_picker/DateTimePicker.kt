@@ -34,6 +34,8 @@ class DateTimePicker : FrameLayout, DateTimeInterface {
 
     private var displayType = intArrayOf(YEAR, MONTH, DAY, HOUR, MIN, SECOND)
 
+    //fork修改
+    private var labelColor = 0
     private var showLabel = true
     private var themeColor = 0
     private var textColor = 0
@@ -65,6 +67,10 @@ class DateTimePicker : FrameLayout, DateTimeInterface {
         showLabel = attributesArray.getBoolean(R.styleable.DateTimePicker_dt_showLabel, true)
         themeColor = attributesArray.getColor(
             R.styleable.DateTimePicker_dt_themeColor,
+            ContextCompat.getColor(context, R.color.colorAccent)
+        )
+        labelColor = attributesArray.getColor(
+            R.styleable.DateTimePicker_dl_labelColor,
             ContextCompat.getColor(context, R.color.colorAccent)
         )
         textColor = attributesArray.getColor(
@@ -146,6 +152,7 @@ class DateTimePicker : FrameLayout, DateTimeInterface {
         setSelectedTextBold(selectedTextBold)
         setTextBold(textBold)
         setTextColor(textColor)
+        setLabelColor(labelColor)
         setDividerColor(dividerColor)
 
 
@@ -283,6 +290,21 @@ class DateTimePicker : FrameLayout, DateTimeInterface {
         mHourSpinner?.textColor = textColor
         mMinuteSpinner?.textColor = textColor
         mSecondSpinner?.textColor = textColor
+    }
+
+    /**
+     * label颜色
+     * @param color
+     */
+    fun setLabelColor(@ColorInt color: Int) {
+        if (color == 0) return
+        labelColor = color
+        mYearSpinner?.labelTextColor = labelColor
+        mMonthSpinner?.labelTextColor = labelColor
+        mDaySpinner?.labelTextColor = labelColor
+        mHourSpinner?.labelTextColor = labelColor
+        mMinuteSpinner?.labelTextColor = labelColor
+        mSecondSpinner?.labelTextColor = labelColor
     }
 
     /**

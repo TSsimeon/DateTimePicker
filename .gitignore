@@ -1,14 +1,34 @@
+### Git ###
+/.git/
+.gitignore
+!/.gitignore
+
+### SVN ###
+.svn/
+
+### Eclipse ###
+/.classpath
+/.project
+/.settings
+
+### IntelliJIDEA ###
+/.idea/
 *.iml
-.gradle
+*.ipr
+*.iws
+
+### AndroidStudio ###
+build/
+/captures/
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.externalNativeBuild/
+
+### Mac ###
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+
+### Gradle ###
+/gradlew*
+/.gradle/
+/node_modules/
+/buildSrc/.gradle/
+.gradle

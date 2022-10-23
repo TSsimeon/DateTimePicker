@@ -10,9 +10,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.InputType;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.NumberKeyListener;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
@@ -285,6 +287,12 @@ public class NumberPicker extends LinearLayout {
      * The color of the selected text.
      */
     private int mSelectedTextColor = DEFAULT_TEXT_COLOR;
+
+    /**
+     * fork修改
+     * 标签文字颜色
+     */
+    private int mLabelTextColor = DEFAULT_TEXT_COLOR;
 
     /**
      * The size of the selected text.
@@ -1977,8 +1985,39 @@ public class NumberPicker extends LinearLayout {
                 y += height;
             }
         } else {
-            canvas.drawText(text, x, y, paint);
+            //fork修改,支持label颜色的定义
+            String textValue = text.replace(label, "");
+            canvas.drawText(textValue, x, y, paint);
+            //绘制label文字
+            if (text.contains(label)) {
+                paint.setColor(mLabelTextColor);
+                //画笔为居中模式,所以只需要偏移宽度的一半+自身宽度的一半
+                float labelOffsetX = getTextWidth(paint, textValue) / 2F + getTextWidth(paint, label) / 2F;
+                canvas.drawText(label, x + labelOffsetX, y, paint);
+                paint.setColor(mSelectedTextColor);
+                String value = text.substring(0, text.length() - label.length());
+            }
         }
+    }
+
+    /**
+     * 获取文字宽度
+     *
+     * @param paint
+     * @param str
+     * @return
+     */
+    private int getTextWidth(Paint paint, String str) {
+        int iRet = 0;
+        if (str != null && str.length() > 0) {
+            int len = str.length();
+            float[] widths = new float[len];
+            paint.getTextWidths(str, widths);
+            for (int j = 0; j < len; j++) {
+                iRet += (int) Math.ceil(widths[j]);
+            }
+        }
+        return iRet;
     }
 
     @Override
@@ -2366,7 +2405,15 @@ public class NumberPicker extends LinearLayout {
             return;
         }
 
-        mSelectedText.setText(text + label);
+        //fork修改,这里的修改并没有作用,实际绘制其实是发生再onDraw中了
+        if (text.length() != 0 && label.length() != 0) {
+            SpannableStringBuilder spannableString = new SpannableStringBuilder(text + label);
+            ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(mLabelTextColor);
+            spannableString.setSpan(foregroundColorSpan, text.length() - 1, text.length() + label.length() - 1, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            mSelectedText.setText(spannableString);
+        } else {
+            mSelectedText.setText(text + label);
+        }
     }
 
     /**
@@ -2787,6 +2834,14 @@ public class NumberPicker extends LinearLayout {
     public void setSelectedTextColor(@ColorInt int color) {
         mSelectedTextColor = color;
         mSelectedText.setTextColor(mSelectedTextColor);
+    }
+
+    public int getLabelTextColor() {
+        return mLabelTextColor;
+    }
+
+    public void setLabelTextColor(int mLabelTextColor) {
+        this.mLabelTextColor = mLabelTextColor;
     }
 
     public void setSelectedTextColorResource(@ColorRes int colorId) {

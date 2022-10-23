@@ -22,9 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/shape_bg_round_white_5"
-        app:dt_showLabel="true"
+        app:dl_labelColor="#FF0000"
         app:dt_normalTextSize="14sp"
-        app:dt_selectTextSize="16sp" />
+        app:dt_selectTextSize="16sp"
+        app:dt_showLabel="true" />
 
 
     <TextView
@@ -43,8 +44,8 @@
         android:layout_height="38dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_action_set"
         android:background="@drawable/shape_button_bg"
+        android:drawableLeft="@drawable/ic_action_set"
         android:drawablePadding="10dp"
         android:drawableTint="#333333"
         android:gravity="center"
@@ -60,8 +61,8 @@
         android:layout_height="38dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_action_set"
         android:background="@drawable/shape_button_bg"
+        android:drawableLeft="@drawable/ic_action_set"
         android:drawablePadding="10dp"
         android:drawableTint="#333333"
         android:gravity="center"
@@ -77,8 +78,8 @@
         android:layout_height="38dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_action_set"
         android:background="@drawable/shape_button_bg"
+        android:drawableLeft="@drawable/ic_action_set"
         android:drawablePadding="10dp"
         android:drawableTint="#333333"
         android:gravity="center"
@@ -92,8 +93,8 @@
         android:id="@+id/btnGlobalization"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/shape_button_bg"
         android:drawableLeft="@drawable/ic_action_set"
         android:drawablePadding="10dp"
